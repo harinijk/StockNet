@@ -1,0 +1,59 @@
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  color: rgb(145, 178, 214);
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  flex-direction: column;
+}
+
+.Dropdown {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.dropdown-container {
+  margin: 10px auto;
+  margin-bottom: 20px;
+  width: 230px;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+p {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.account-text {
+  color: black;
+}
+
+.text-danger {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.login-message, .Dropdown {
+  color: black;
+}
+
+.account-text {
+  font-size: 15px;
+}
+
+.signout-button {
+  background-color: #50a3a2;
+  color: white;
+  font-size: 16px;
+}
+
+

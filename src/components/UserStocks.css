@@ -1,0 +1,54 @@
+.user-stocks-container {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .user-stocks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0; 
+    
+  }
+  
+  .user-stocks-table th, .user-stocks-table td {
+    padding: 5px; /* Reduced padding */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: black;
+  }
+  
+  .user-stocks-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  .user-stocks-container h2 {
+    color: black;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .individual-buy-sell-buttons{
+    padding:4px;
+    display:flex;
+    gap:10px;
+  }
+
+  .individual-buy, .individual-sell{
+    background-color: #42918c;
+    color:white;
+    border-color:#95D2B3;
+    border-radius: 5px;
+  }
+
+  .individual-buy:hover, .individual-sell:hover{
+    background-color: #65ad89;
+  }

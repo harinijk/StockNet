@@ -1,0 +1,84 @@
+.buy-and-graph {
+  display: flex;
+  margin-top: 100px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.buy-container {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width:400px;
+  margin-left:400px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  flex: 0 0 100px;
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+.form-group input, .form-group span {
+  flex-grow: 1;
+}
+
+.error-message {
+  color: red;
+  position: relative;
+  margin-left:90px;
+}
+
+.success-message {
+  color: green;
+}
+
+.buystock-button {
+  width: 150px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.buy-container h2 {
+  text-align: center;
+  color: #333;
+  width: 100%;
+}
+
+.buy-container form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.buy-container form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px; 
+}
+
+.stock-chart-section {
+  display: flex;
+  max-width: 300px;
+  margin-left: 100px;
+  margin-top: 60px;
+  flex-grow: 1; 
+}
+
+
+
+
+
+
+

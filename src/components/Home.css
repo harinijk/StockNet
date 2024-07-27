@@ -1,0 +1,52 @@
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.home-container h1 {
+  color:black;
+  margin-left: 470px; /* Adjust as needed for centering */
+}
+
+.stocks-section {
+  width:500px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-stocks-section {
+  flex: 1;
+  margin-left: 250px; 
+  width:100px;/* Adjust margin for spacing */
+}
+
+
+@media (min-width: 500px) {
+  .stocks-section {
+    width:800px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .user-stocks-section {
+    flex: 1;
+    margin-left: 450px; /* Adjust margin for spacing */
+  }
+}
+
+@media (min-width: 800px) {
+  .stocks-section {
+    width:1000px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .user-stocks-section {
+    flex: 1;
+    margin-left: 250px; /* Adjust margin for spacing */
+  }
+}
+
+
+  
