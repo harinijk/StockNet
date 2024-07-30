@@ -33,7 +33,6 @@ app.use(session({
 
 
 // Endpoint for user signup
-// Endpoint for user signup
 app.post("/signup", async (req, res) => {
   const { fname, lname, email, password, answer, question } = req.body;
 
@@ -124,7 +123,7 @@ const ensureLoggedIn = (req, res, next) => {
   }
 };
 
-
+// Endpoint to fetch stocks
 app.get('/stocks', async (req, res) => {
   const query = 'SELECT * FROM stocks WHERE date = CURRENT_DATE LIMIT 10';
   
@@ -158,7 +157,7 @@ app.get('/account-balance', ensureLoggedIn, async (req, res) => {
   }
 });
 
-
+// Endpoint to fetch stock price
 app.get('/stock-price/:symbol', async (req, res) => {
   const { symbol } = req.params;
 
@@ -176,7 +175,7 @@ app.get('/stock-price/:symbol', async (req, res) => {
   }
 });
 
-// Backend route to handle buying stocks
+// Route to handle buying stocks
 app.post('/buy', async (req, res) => {
   const { email, stockSymbol, quantity } = req.body;
 
@@ -225,7 +224,7 @@ app.post('/buy', async (req, res) => {
   }
 });
 
-
+// Route for selling stocks
 app.post('/sell', async (req, res) => {
   const { email, stockSymbol, quantity } = req.body;
 
@@ -299,10 +298,7 @@ app.post('/sell', async (req, res) => {
   }
 });
 
-
-
-
-
+// Endpoint to fetch the users stocks
 app.get('/user-stocks/:email', async (req, res) => {
   const { email } = req.params;
   console.log('Received email:', email); 
@@ -323,7 +319,7 @@ app.get('/user-stocks/:email', async (req, res) => {
   }
 });
 
-
+//Endpoint for logout
 app.post('/logout', (req, res) => {
   req.session.destroy(err => {
     if (err) {
@@ -334,7 +330,7 @@ app.post('/logout', (req, res) => {
   });
 });
 
-
+//Endpoint for the stock data
 app.get('/stock-data/:symbol', async (req, res) => {
   const { symbol } = req.params;
   try {
@@ -373,8 +369,7 @@ app.get('/user-transactions/:email', async (req, res) => {
   }
 });
 
-
-
+//Endpoint for authentication
 app.get('/check-auth', (req, res) => {
   if (req.session.userEmail) {
     console.log("fujehnfasfnoaeisfnaoif");
@@ -415,6 +410,7 @@ app.post('/funds', ensureLoggedIn, async (req, res) => {
   }
 });
 
+//Endpoint to withdraw funds from user account
 app.post('/withdraw', ensureLoggedIn, async (req, res) => {
   const email = req.session.userEmail;
   const { amount } = req.body;
