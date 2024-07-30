@@ -43,9 +43,6 @@ function HomeMenu() {
     <div>
       <Button
         id="user-menu-button"
-        aria-controls={open ? 'user-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
         startIcon={<PersonIcon style={{ fontSize: 30, color:'#F1F8E8' }} />} 
       >
@@ -55,9 +52,6 @@ function HomeMenu() {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'user-menu-button',
-        }}
       >
         <MenuItem onClick={handlePreferences}>Preferences</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem> 

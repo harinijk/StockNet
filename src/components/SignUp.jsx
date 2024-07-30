@@ -20,18 +20,22 @@ function SignUp() {
     lname: '',
     email: '',
     password: '',
-    answer: ''
+    answer: '',
+    question: ''  // Add this line to track the selected question
   });
 
-  const navigate = useNavigate();
-
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleInput = (event) => {
     const { name, value } = event.target;
     setValues(prev => ({ ...prev, [name]: value }));
     setErrors(prev => ({ ...prev, [name]: '' }));
   }
+
+  const handleDropdownChange = (selectedQuestion) => {
+    setValues(prev => ({ ...prev, question: selectedQuestion }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,14 +45,13 @@ function SignUp() {
       setErrors(validationErrors);
       return;
     }
-    
+
     axios.post("http://localhost:3000/signup", values)
       .then(res => {
         navigate(`/login`);
       })
       .catch(err => console.log(err));
   }
-
 
   return (
     <div className="container">
@@ -64,12 +67,13 @@ function SignUp() {
           <input type="password" placeholder="Password" name="password" onChange={handleInput} />
           <div>{errors.password && <span className="text-danger">{errors.password}</span>}</div>
           <div className="Dropdown">
-            <Dropdown questions={questions} />
+            <Dropdown questions={questions} onChange={handleDropdownChange} />
           </div>
           <input type="text" placeholder="Answer the question" name="answer" onChange={handleInput} />
           <div>{errors.answer && <span className="text-danger">{errors.answer}</span>}</div>
           <Button variant="contained" className="signup-button" type="submit" sx={{
               backgroundColor: '#50a3a2',
+              
               color: 'white',
               '&:hover': {
                 backgroundColor: '#42918c',
@@ -85,3 +89,4 @@ function SignUp() {
 }
 
 export default SignUp;
+

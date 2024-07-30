@@ -33,17 +33,18 @@ app.use(session({
 
 
 // Endpoint for user signup
+// Endpoint for user signup
 app.post("/signup", async (req, res) => {
-  const { fname, lname, email, password, answer } = req.body;
+  const { fname, lname, email, password, answer, question } = req.body;
 
   const query = `
-    INSERT INTO users (fname, lname, email, password, answer)
-    VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO users (fname, lname, email, password, answer, question)
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *;
   `;
 
   try {
-    const result = await pool.query(query, [fname, lname, email, password, answer]);
+    const result = await pool.query(query, [fname, lname, email, password, answer, question]);
     res.status(201).json({
       message: "User signed up successfully",
       user: result.rows[0],
@@ -55,6 +56,43 @@ app.post("/signup", async (req, res) => {
       error: error.message,
     });
   }
+});
+
+
+app.post('/forgot-password', async (req, res) => {
+  const { email, question, answer, newPassword } = req.body;
+
+  try {
+    const query = `
+      SELECT * FROM users WHERE email = $1 AND question = $2 AND answer = $3;
+    `;
+    const result = await pool.query(query, [email, question, answer]);
+
+    if (result.rows.length > 0) {
+      const updateQuery = `
+        UPDATE users SET password = $1 WHERE email = $2;
+      `;
+      await pool.query(updateQuery, [newPassword, email]);
+      res.status(200).json({ message: 'Password updated successfully' });
+    } else {
+      res.status(400).json({ message: 'Invalid security question answer or user does not exist' });
+    }
+  } catch (error) {
+    console.error('Error resetting password:', error);
+    res.status(500).json({ message: 'Error resetting password', error: error.message });
+  }
+});
+;
+
+// Endpoint to get security questions
+app.get('/security-questions', (req, res) => {
+  res.json([
+    "What is your favorite color?",
+    "What is your favourite city?",
+    "What was the name of your first pet?",
+    "What was your first car?",
+    "What elementary school did you attend?"
+  ]);
 });
 
 // Endpoint for user login
@@ -359,14 +397,15 @@ app.post('/funds', ensureLoggedIn, async (req, res) => {
   try {
     // Fetch the user's current account balance
     const userResult = await pool.query('SELECT account_balance FROM users WHERE email = $1', [email]);
-    const currentBalance = parseFloat(userResult.rows[0].account_balance);
+    let currentBalance = parseFloat(userResult.rows[0].account_balance);
 
     if (isNaN(currentBalance)) {
-      return res.status(400).json({ error: 'Invalid account balance' });
+      currentBalance = 0;
     }
 
     // Update the user's account balance
     const newBalance = currentBalance + parseFloat(amount);
+    
     await pool.query('UPDATE users SET account_balance = $1 WHERE email = $2', [newBalance, email]);
 
     res.json({ newBalance, message: `Successfully added $${amount} to your account` });

@@ -17,43 +17,42 @@ const Buy = () => {
   const [error, setError] = useState('');
   const [showCurrentBalance, setShowCurrentBalance] = useState(false); 
   const location = useLocation();
-
+ 
+  // use effect for if we click buy from table 
   useEffect(() => {
-    const fetchData = async () => {
       if (location.state) {
-        const { stockSymbol, quantity } = location.state;
-        if (stockSymbol && quantity) {
-          try {
-            const response = await axios.get(`http://localhost:3000/stock-price/${stockSymbol}`);
-            const price = parseFloat(response.data.price);
-
-            setStockSymbol(stockSymbol);
-            setQuantity(quantity);
-            setStockPrice(price);
-            calculateTotalCost(price, quantity); 
-            setError('');
-          } catch (error) {
-            console.error('Error fetching stock price:', error);
-            setError('Error fetching stock price');
-          }
-        }
+        setStockSymbol(location.state.stockSymbol || '');
+        setQuantity(location.state.quantity || 0);
+        fetchStockPrice(location.state.stockSymbol, location.state.quantity || 0);
       }
-      fetchAccountBalance();
-    };
 
-    fetchData();
+      const fetchAccountBalance = async () => {
+        try {
+          const response = await axios.get('http://localhost:3000/account-balance');
+          const balance = parseFloat(response.data.accountBalance);
+          setAccountBalance(balance);
+        } catch (error) {
+          console.error('Error fetching account balance', error);
+          setError('Error fetching account balance');
+        }
+      };
+          
+      fetchAccountBalance();
+
   }, [location.state]);
 
-  const fetchAccountBalance = async () => {
+  const fetchStockPrice = async (symbol, qty) => {
     try {
-      const response = await axios.get('http://localhost:3000/account-balance');
-      const balance = parseFloat(response.data.accountBalance);
-      setAccountBalance(balance);
+      const response = await axios.get(`http://localhost:3000/stock-price/${symbol}`);
+      const price = parseFloat(response.data.price);
+      setStockPrice(price);
+      setTotalValue(price * qty);
     } catch (error) {
-      console.error('Error fetching account balance', error);
-      setError('Error fetching account balance');
+      console.error('Error fetching stock price', error);
+      setError('Error fetching stock price');
     }
   };
+
 
   const handleStockChange = async (e) => {
     const symbol = e.target.value;

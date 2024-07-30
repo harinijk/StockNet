@@ -67,15 +67,89 @@ input[type=checkbox] {
 }
   
 .forgot-password-link {
-    color: rgb(16, 62, 171);
-    font-size: 14px;
-    text-decoration: none;
-    margin-top: 20px;
-    transition: text-decoration 0.3s;
-}
+    margin-top: 10px;
+  }
   
-.forgot-password-link:hover {
-    color: rgb(16, 62, 171);
-    text-decoration: underline;
-}
-
+  .forgot-password-text {
+    color: #2b1ac7;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .forgot-password-text:hover {
+    color:#2b1ac7;
+  }
+  .forgot-password-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Slightly darker overlay for better focus */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure the popup is above other content */
+    color: black;
+    overflow: hidden; /* Prevent background scrolling */
+  }
+  
+  .popup-content {
+    background: white;
+    padding: 30px; /* More padding for better spacing */
+    border-radius: 12px; /* Softer rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    width: 400px;
+    max-width: 90%; /* Ensure it fits within smaller viewports */
+    text-align: center; /* Center align text */
+    position: relative; /* For positioning the close icon */
+  }
+  
+  .popup-content h2 {
+    margin-top: 0;
+    margin-bottom: 20px; /* Space between heading and input fields */
+    font-size: 1.5em; /* Slightly larger heading */
+  }
+  
+  .popup-content input,
+  .popup-content select {
+    display: block;
+    width: calc(100% - 20px); /* Account for padding */
+    margin-bottom: 15px; /* More space between inputs */
+    padding: 10px; /* Padding for inputs */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 1em; /* Larger input text */
+  }
+  
+  .popup-content button {
+    margin-right: 10px;
+    padding: 10px 20px; /* More padding for buttons */
+    background: #007bff; /* Primary button color */
+    color: white; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 1em; /* Larger button text */
+    transition: background 0.3s; /* Smooth background color transition */
+  }
+  
+  .popup-content button:hover {
+    background: #0056b3; /* Darker shade on hover */
+  }
+  
+  .popup-content button:disabled {
+    background: #cccccc; /* Disabled button color */
+    cursor: not-allowed; /* Not-allowed cursor for disabled buttons */
+  }
+  
+  /* Close Icon */
+  .close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #333;
+  }
+  
