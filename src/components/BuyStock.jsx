@@ -46,7 +46,7 @@ const Buy = () => {
       const response = await axios.get(`http://localhost:3000/stock-price/${symbol}`);
       const price = parseFloat(response.data.price);
       setStockPrice(price);
-      setTotalValue(price * qty);
+      setTotalCost(price * qty);
     } catch (error) {
       console.error('Error fetching stock price', error);
       setError('Error fetching stock price');
