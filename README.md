@@ -2,8 +2,6 @@
 
 A simple, session-based stock-trading demo where users can sign up, log in, manage funds, view prices, and buy/sell shares. **Front end**: React + React Router + MUI + Chart.js. **Back end**: Node/Express + `pg` + `express-session`. **DB**: PostgreSQL.
 
-> ⚠️ **Disclaimer**: Educational project only. Not financial advice. Do not use with real accounts or money.
-
 ---
 
 ## ✨ Features
@@ -74,7 +72,7 @@ node index.js               # or: npx nodemon index.js
 # -> "Server running on port 3000"
 ~~~
 
-### 3) Configure the Client
+### Configure the Client
 
 - Ensure your React app runs on `http://localhost:5173` (Vite default).
 - **Important:** Cookies must be sent with Axios for session auth.
